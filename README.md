@@ -7,10 +7,7 @@ Running:
 2) tested with generic localhost MySQL
 3) make sure to replace MySQL info at top of SeleniumSQL file before running
 
-Things to look into:
-1) could condense some code by making next page navigation into a function
-2) could fill spec name array while navigating the specs to make code look cleaner, but nbd
-3) Concurrency could be looked into because the program takes awhile to execute currently. However, there would be issues with becoming locked due to ddos protection if requesting too frequently.
+
 
 
 
