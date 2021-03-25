@@ -27,7 +27,7 @@ options = webdriver.ChromeOptions()
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
 driver = webdriver.Chrome(PATH, options=options)
 action = ActionChains(driver)
-
+driver.implicitly_wait(5)
 
 
 driver.get("https://raider.io/")
@@ -38,9 +38,9 @@ print(driver.title)
 #clicking agree to cookies and tos
 driver.set_window_size( 1000, 1200)
 time.sleep(2)#sleep for time for cookies/tos to appear
-cookiesButtonElement = driver.find_element_by_xpath('//*[@id="qc-cmp2-ui"]/div[2]/div/button[2]')
-driver.execute_script("arguments[0].click();", cookiesButtonElement)
-agreeTermsButton = driver.find_element_by_xpath('/html/body/div[2]/div/div[3]/div/div[2]/button')
+#cookiesButtonElement = driver.find_element_by_xpath('//*[@id="qc-cmp2-ui"]/div[2]/div/button[2]')
+#driver.execute_script("arguments[0].click();", cookiesButtonElement)
+agreeTermsButton = driver.find_element_by_xpath('//*[@id="application"]/div/div[3]/div/div[2]/button')#'/html/body/div[2]/div/div[3]/div/div[2]/button')
 agreeTermsButton.click()
 
 
@@ -124,7 +124,8 @@ for x in range(5):
             top100Array[currentRank-1][4] = "?cn"
             top100Array[currentRank-1][5] = "?cn"
             top100Array[currentRank-1][6] = "?cn"
-
+    
+    time.sleep(2)
     #going to next page
     if 0 < x < 4:
         try:
@@ -138,7 +139,7 @@ for x in range(5):
             nextPageButton.click()
         except:
             print("error with next page button click")
-    time.sleep(2)
+    time.sleep(5)
 
 #fill in gaps for class/spec/cov for non cn, and fill in some dps for cn
 for x in range(100):
@@ -229,11 +230,11 @@ print("clicked role leaderboards menu item")
 #dismiss menu that was opened to get to leaderboards
 driver.execute_script("arguments[0].style.display ='none';", mainSiteDropDown)
 print("closed main site drop down")
-time.sleep(2)
+time.sleep(4)
 
 
 #preparing for role leaderboards navigation
-lbMenuSiteDropDown = driver.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[1]/div/div/div[1]/div/div/div/ul/li[4]/div')
+lbMenuSiteDropDown = driver.find_element_by_xpath('//*[@id="application"]/div/div[2]/div[1]/div/div/div[1]/div/div/div/ul/li[4]/div/span')#'/html/body/div[2]/div/div[2]/div[1]/div/div/div[1]/div/div/div/ul/li[4]/div')
 lbMenuSiteDropDown.click()
 time.sleep(1)
 
@@ -251,8 +252,7 @@ roleSubMenuOptions = roleSubMenuList.find_elements_by_tag_name('li')
 
 #iterating through the role leaderboards
 for y in range(len(roleSubMenuOptions))[2:]:
-    lbMenuSiteDropDown = driver.find_element_by_xpath(
-        '/html/body/div[2]/div/div[2]/div[1]/div/div/div[1]/div/div/div/ul/li[4]/div')
+    lbMenuSiteDropDown = driver.find_element_by_xpath('//*[@id="application"]/div/div[2]/div[1]/div/div/div[1]/div/div/div/ul/li[4]/div/span')
     lbMenuSiteDropDown.click()
     time.sleep(1)
     action.move_to_element(lbSubMenuOptions[0]).perform()
@@ -312,6 +312,7 @@ for y in range(len(roleSubMenuOptions))[2:]:
                 top100RoleArray[y-2][currentRank-1][5] = "?cn"
                 top100RoleArray[y-2][currentRank-1][6] = "?cn"
 
+        time.sleep (2)
         #going to next page
         if 0 < x < 4:
             try:
@@ -325,7 +326,7 @@ for y in range(len(roleSubMenuOptions))[2:]:
                 nextPageButton.click()
             except:
                 print("error with next page button click")
-        time.sleep(2)
+        time.sleep(5)
 
     #reset to first rankings page for new role
     firstRankingsButton = driver.find_element_by_xpath('//*[@id="content"]/div/div/div/div[2]/a[1]/span')
@@ -384,7 +385,7 @@ for y in range(3):
 
         #print result for checking      
         print(top100RoleArray[y][x][0]+":\t", top100RoleArray[y][x][1], top100RoleArray[y][x][2], top100RoleArray[y][x][3], top100RoleArray[y][x][4], top100RoleArray[y][x][5], top100RoleArray[y][x][6], top100RoleArray[y][x][7], top100RoleArray[y][x][8])
-        
+        time.sleep(1)       
 
 
   
@@ -417,9 +418,9 @@ print(driver.title)
 #clicking agree to cookies and tos
 driver.set_window_size( 1000, 1200)
 time.sleep(2)#sleep for time for cookies/tos to appear
-cookiesButtonElement = driver.find_element_by_xpath('//*[@id="qc-cmp2-ui"]/div[2]/div/button[2]')
-driver.execute_script("arguments[0].click();", cookiesButtonElement)
-agreeTermsButton = driver.find_element_by_xpath('/html/body/div[2]/div/div[3]/div/div[2]/button')
+#cookiesButtonElement = driver.find_element_by_xpath('//*[@id="qc-cmp2-ui"]/div[2]/div/button[2]')
+#driver.execute_script("arguments[0].click();", cookiesButtonElement)
+agreeTermsButton = driver.find_element_by_xpath('//*[@id="application"]/div/div[3]/div/div[2]/button')#'/html/body/div[2]/div/div[3]/div/div[2]/button')
 agreeTermsButton.click()
 
 #make drop menu for m+ class leaderboards appear
@@ -444,7 +445,7 @@ time.sleep(10)
 
 
 #preparing to navigate through each class
-classMenuSiteDropDown = driver.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[1]/div/div/div[1]/div/div/div/ul/li[4]/div')
+classMenuSiteDropDown = driver.find_element_by_xpath('//*[@id="application"]/div/div[2]/div[1]/div/div/div[1]/div/div/div/ul/li[4]/div/span')
 classMenuSiteDropDown.click()
 time.sleep(2)
 
@@ -457,10 +458,10 @@ currentSpecNumber = 0
 
 #iteratively navigating through classes
 for classOption in classSubMenuOptions:
-    classMenuSiteDropDown = driver.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[1]/div/div/div[1]/div/div/div/ul/li[4]/div')
+    classMenuSiteDropDown = driver.find_element_by_xpath('//*[@id="application"]/div/div[2]/div[1]/div/div/div[1]/div/div/div/ul/li[4]/div/span')
     classMenuSiteDropDown.click()
     time.sleep(1)
-    action.move_to_element(classOption).perform()#????
+    action.move_to_element(classOption).perform()
     currentClassString = classOption.find_element_by_tag_name("span").find_elements_by_tag_name("span")[1].text
     time.sleep(1)
 
@@ -469,7 +470,7 @@ for classOption in classSubMenuOptions:
 
     
     for y in range(len(specSubMenuOptions)):
-        classMenuSiteDropDown = driver.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[1]/div/div/div[1]/div/div/div/ul/li[4]/div')
+        classMenuSiteDropDown = driver.find_element_by_xpath('//*[@id="application"]/div/div[2]/div[1]/div/div/div[1]/div/div/div/ul/li[4]/div/span')
         classMenuSiteDropDown.click()
         time.sleep(1)
         action.move_to_element(classOption).perform()
@@ -479,13 +480,21 @@ for classOption in classSubMenuOptions:
         time.sleep(1)
         print("current spec number:",currentSpecNumber)
 
+        lastRows = None
+
         #loop through scores for current spec
         for x in range(5):
             #grab table and elements in the table to print/store
             #for specs: rank#, name#, score#, Covenant#, Faction#, Region#, Date
-            driver.implicitly_wait(5)
             highScoreCurrentTable = driver.find_element_by_xpath('//*[@id="content"]/div/div/div/table/tbody')
             highScoreRows = highScoreCurrentTable.find_elements_by_tag_name("tr")
+
+            if(lastRows != None):
+                if(lastRows == highScoreRows):
+                    time.sleep(5)
+                    highScoreCurrentTable = driver.find_element_by_xpath('//*[@id="content"]/div/div/div/table/tbody')
+                    highScoreRows = highScoreCurrentTable.find_elements_by_tag_name("tr")
+
 
             for row in highScoreRows:
                 rowTDs = row.find_elements_by_tag_name("td")
@@ -529,6 +538,7 @@ for classOption in classSubMenuOptions:
                 
                 print(top100CurrentSpecArray[currentSpecNumber][currentRank-1][0]+":\t", top100CurrentSpecArray[currentSpecNumber][currentRank-1][1], top100CurrentSpecArray[currentSpecNumber][currentRank-1][2], top100CurrentSpecArray[currentSpecNumber][currentRank-1][3], top100CurrentSpecArray[currentSpecNumber][currentRank-1][4], top100CurrentSpecArray[currentSpecNumber][currentRank-1][5])
 
+            lastRows = highScoreRows
             time.sleep(3)
             if 0 < x < 4:
                 try:
@@ -565,7 +575,7 @@ for y in range(36):
 
 print("**finished spec commits**")
 
-
+print("date: ",date.today())
 print("done :)")
 quit()
 
